@@ -6,7 +6,8 @@
   "author": "Rinat <lich666black@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@zilliqa-js/zilliqa": "^1.0.0"
+    "@zilliqa-js/zilliqa": "^1.0.0",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
     "tslib": "^2.0.3"
