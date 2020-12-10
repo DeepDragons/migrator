@@ -1,0 +1,8 @@
+{
+  "name": "migrator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:DeepDragons/migrator.git",
+  "author": "Rinat <lich666black@gmail.com>",
+  "license": "MIT"
+}
