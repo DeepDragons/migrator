@@ -4,5 +4,11 @@
   "main": "index.js",
   "repository": "git@github.com:DeepDragons/migrator.git",
   "author": "Rinat <lich666black@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@zilliqa-js/zilliqa": "^1.0.0"
+  },
+  "devDependencies": {
+    "tslib": "^2.0.3"
+  }
 }
