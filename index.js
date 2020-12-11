@@ -7,7 +7,7 @@ const _ = require('lodash');
 const node = 'https://api.zilliqa.com';
 const MSG_VERSION = 1;
 const maincontractFrom = fromBech32Address('zil1epndtz8lhv7lemwfrnadvwftmtaruclkdg6fee');
-const maincontractTo = fromBech32Address('zil1zw5r4c5ygmhahe6shfp4x6alee0cug00jj7t63');
+const maincontractTo = fromBech32Address('zil1t3xf4738gggt95zg3d0g4d96s6d6zzare6kcue');
 const transition = 'GiveBirth';
 const privateKey = process.env.KEY;
 
@@ -18,11 +18,11 @@ function sleap(value) {
 }
 
 function getState(stage) {
-  if (stage > 1) {
-    return 1;
+  if (Number(stage) > 1) {
+    return '1';
   }
 
-  return stage;
+  return String(stage);
 };
 
 function geturl(id, stage) {
@@ -53,21 +53,14 @@ async function main() {
   const toAddr = maincontractTo;
   const values = Object.keys(token_owners).map((tokenID) => ({
     constructor: 'Dragon',
-    argtypes: [
-      'Uint256',
-      'ByStr20',
-      'Uint32',
-      'String',
-      'Uint256',
-      'Uint256'
-    ],
+    argtypes: [],
     arguments: [
       tokenID, //token_id
       String(token_owners[tokenID]).toLowerCase(), // owner
       getState(tokens_owner_stage[token_owners[tokenID]][tokenID]), // stage
       geturl(tokenID, tokens_owner_stage[token_owners[tokenID]][tokenID]), // token_uri
-      token_gen_image[tokenID], // token_gen_battle
-      token_gen_battle[tokenID] // token_gen_image
+      token_gen_battle[tokenID], // token_gen_image
+      token_gen_image[tokenID] // token_gen_battle
     ]
   }));
   zilliqa.wallet.addByPrivateKey(privateKey);
