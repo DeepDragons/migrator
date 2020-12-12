@@ -7,7 +7,7 @@ const _ = require('lodash');
 const node = 'https://api.zilliqa.com';
 const MSG_VERSION = 1;
 const maincontractFrom = fromBech32Address('zil1epndtz8lhv7lemwfrnadvwftmtaruclkdg6fee');
-const maincontractTo = fromBech32Address('zil1t3xf4738gggt95zg3d0g4d96s6d6zzare6kcue');
+const maincontractTo = fromBech32Address('zil1wq45m2r8m4wjvy2l0dhd6rszlyyj6ruqjsfm02');
 const transition = 'GiveBirth';
 const privateKey = process.env.KEY;
 
@@ -47,7 +47,7 @@ async function main() {
   } = await getContract();
   const netID = await zilliqa.network.GetNetworkId();
   const version = bytes.pack(netID.result, MSG_VERSION);
-  const gasLimit = Long.fromNumber(9000);
+  const gasLimit = Long.fromNumber(45000);
   const gasPrice = new BN('2000000000');
   const amount = new BN(0);
   const toAddr = maincontractTo;
@@ -64,7 +64,7 @@ async function main() {
     ]
   }));
   zilliqa.wallet.addByPrivateKey(privateKey);
-  const chunks = _.chunk(values, 1);
+  const chunks = _.chunk(values, 100);
   const balance = await zilliqa.blockchain.getBalance(zilliqa.wallet.defaultAccount.address);
   let nonce = balance.result.nonce;
   const pubKey = zilliqa.wallet.defaultAccount.publicKey;
@@ -98,8 +98,9 @@ async function main() {
       txParams
     );
 
-    console.log(JSON.stringify(tx, null, 4));
-    break;
+    console.log(tx.error, `0x${tx.result.TranID}`);
+
+    await sleap(2000);
   }
 }
 
